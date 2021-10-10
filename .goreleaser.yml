@@ -4,3 +4,29 @@ builds:
     goarch:
       - amd64
       - arm64
+
+changelog:
+  filters:
+    exclude:
+      - '^Merge pull request'
+
+furies:
+  - account: vitalvas
+    formats:
+      - deb
+
+nfpms:
+  - id: ccdns
+    vendor: The VitalVas
+    homepage: https://github.com/vitalvas/ccdns
+    package_name: ccdns
+    description: Customized CoreDNS Server
+    maintainer: The VitalVas <source@vitalvas.com>
+    license: MIT
+    formats:
+      - deb
+    contents:
+      - src: tools/ccdns.service
+        dst: /lib/systemd/system/ccdns.service
+        file_info:
+          mode: 0644
