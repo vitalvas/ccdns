@@ -10,11 +10,6 @@ changelog:
     exclude:
       - '^Merge pull request'
 
-furies:
-  - account: vitalvas
-    formats:
-      - deb
-
 nfpms:
   - id: ccdns
     vendor: The VitalVas
