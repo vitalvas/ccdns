@@ -31,6 +31,8 @@ import (
 	_ "github.com/coredns/coredns/plugin/template"
 	_ "github.com/coredns/coredns/plugin/tls"
 	_ "github.com/coredns/coredns/plugin/whoami"
+
+	_ "github.com/vitalvas/ccdns/plugins/psqlx"
 )
 
 var (
@@ -70,6 +72,7 @@ var directives = []string{
 	"forward",
 	"grpc",
 	"whoami",
+	"psqlx",
 }
 
 func init() {
