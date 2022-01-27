@@ -21,3 +21,6 @@ jobs:
 
     - name: Build
       run: go build -v ./...
+
+    - name: Stats
+      run: ls -lah .
