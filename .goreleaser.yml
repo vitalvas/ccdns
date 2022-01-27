@@ -26,3 +26,7 @@ nfpms:
         dst: /lib/systemd/system/ccdns.service
         file_info:
           mode: 0644
+      - dst: /etc/ccdns
+        type: dir
+        file_info:
+          mode: 0755
