@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/coredns/caddy v1.1.1
 	github.com/coredns/coredns v1.8.7
+	github.com/miekg/redis v0.0.0-20211230082525-3c77ac39a23b
 )
 
 require (
@@ -19,6 +20,7 @@ require (
 	github.com/grpc-ecosystem/grpc-opentracing v0.0.0-20180507213350-8e809c8a8645 // indirect
 	github.com/infobloxopen/go-trees v0.0.0-20200715205103-96a057b8dfb9 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
+	github.com/mediocregopher/radix.v2 v0.0.0-20181115013041-b67df6e626f9 // indirect
 	github.com/miekg/dns v1.1.45 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/prometheus/client_golang v1.12.0 // indirect

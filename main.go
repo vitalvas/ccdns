@@ -31,6 +31,7 @@ import (
 	_ "github.com/coredns/coredns/plugin/template"
 	_ "github.com/coredns/coredns/plugin/tls"
 	_ "github.com/coredns/coredns/plugin/whoami"
+	_ "github.com/miekg/redis"
 )
 
 var (
@@ -61,6 +62,7 @@ var directives = []string{
 	"any",
 	"loadbalance",
 	"cache",
+	"redisc",
 	"header",
 	"minimal",
 	"template",
