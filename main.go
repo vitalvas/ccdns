@@ -32,6 +32,7 @@ import (
 	_ "github.com/coredns/coredns/plugin/tls"
 	_ "github.com/coredns/coredns/plugin/whoami"
 	_ "github.com/miekg/redis"
+	_ "github.com/milgradesec/filter"
 )
 
 var (
@@ -69,6 +70,7 @@ var directives = []string{
 	"hosts",
 	"file",
 	"loop",
+	"filter",
 	"forward",
 	"grpc",
 	"whoami",
