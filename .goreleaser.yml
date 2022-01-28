@@ -5,6 +5,9 @@ builds:
       - amd64
       - arm
 
+checksum:
+  disable: true
+
 changelog:
   filters:
     exclude:
