@@ -31,8 +31,9 @@ import (
 	_ "github.com/coredns/coredns/plugin/template"
 	_ "github.com/coredns/coredns/plugin/tls"
 	_ "github.com/coredns/coredns/plugin/whoami"
-	_ "github.com/miekg/redis"
 	_ "github.com/milgradesec/filter"
+
+	_ "github.com/vitalvas/ccdns/plugins/redis"
 )
 
 var (

@@ -339,8 +339,6 @@ github.com/miekg/dns v1.1.31/go.mod h1:KNUDUusw/aVsxyTYZM1oqvCicbwhgbNgztCETuNZ7
 github.com/miekg/dns v1.1.43/go.mod h1:+evo5L0630/F6ca/Z9+GAqzhjGyn8/c+TBaOyfEl0V4=
 github.com/miekg/dns v1.1.45 h1:g5fRIhm9nx7g8osrAvgb16QJfmyMsyOCb+J7LSv+Qzk=
 github.com/miekg/dns v1.1.45/go.mod h1:e3IlAVfNqAllflbibAZEWOXOQ+Ynzk/dDozDxY7XnME=
-github.com/miekg/redis v0.0.0-20211230082525-3c77ac39a23b h1:fJj1mS7UM9O9VWDDaWLrncwHocREW0v3IgaWPmJEa1E=
-github.com/miekg/redis v0.0.0-20211230082525-3c77ac39a23b/go.mod h1:3drcsT5SoRyTxa38Mi9AZVoKd2yXJD8L0SzhK09ts0U=
 github.com/milgradesec/filter v1.2.3 h1:/UFA8jdELGX9YywV3e/BvzBtEpN/1WADIsqjkzqEdCg=
 github.com/milgradesec/filter v1.2.3/go.mod h1:vh/KDADnHPyF2SwcV2kGNSVTZcV7noEkbyBpl8SfDpo=
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
