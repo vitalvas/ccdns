@@ -1,4 +1,4 @@
-package redis
+package redisc
 
 import (
 	"github.com/coredns/coredns/plugin"
