@@ -33,7 +33,7 @@ import (
 	_ "github.com/coredns/coredns/plugin/whoami"
 	_ "github.com/milgradesec/filter"
 
-	_ "github.com/vitalvas/ccdns/plugins/redis"
+	_ "github.com/vitalvas/ccdns/plugins/redisc"
 )
 
 var (
