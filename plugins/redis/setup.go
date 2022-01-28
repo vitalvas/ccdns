@@ -80,6 +80,7 @@ func parse(c *caddy.Controller) (*Redis, error) {
 					return nil, fmt.Errorf("cache TTL can not be zero or negative: %d", pttl)
 				}
 				re.pttl = time.Duration(pttl) * time.Second
+
 			case Denial:
 				args := c.RemainingArgs()
 				if len(args) < 1 {
@@ -94,6 +95,7 @@ func parse(c *caddy.Controller) (*Redis, error) {
 					return nil, fmt.Errorf("cache TTL can not be zero or negative: %d", nttl)
 				}
 				re.nttl = time.Duration(nttl) * time.Second
+
 			case "endpoint":
 				args := c.RemainingArgs()
 				if len(args) < 1 {
@@ -116,6 +118,18 @@ func parse(c *caddy.Controller) (*Redis, error) {
 					return nil, fmt.Errorf("failed to parse IP: %s", h)
 				}
 				re.addr = args[0]
+
+			case "dont_use_hash":
+				args := c.RemainingArgs()
+				if len(args) == 1 {
+					state, err := strconv.ParseBool(args[0])
+					if err != nil {
+						return nil, c.ArgErr()
+					}
+					re.DontUseHash = state
+				} else {
+					re.DontUseHash = true
+				}
 
 			default:
 				return nil, c.ArgErr()

@@ -24,7 +24,13 @@ func (re *Redis) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 
 	m := re.get(now, state, server)
 	if m == nil {
-		crr := &ResponseWriter{ResponseWriter: w, Redis: re, state: state, server: metrics.WithServer(ctx)}
+		crr := &ResponseWriter{
+			ResponseWriter: w,
+			Redis:          re,
+			state:          state,
+			server:         metrics.WithServer(ctx),
+			DontUseHash:    re.DontUseHash,
+		}
 		return plugin.NextOrFailure(re.Name(), re.Next, ctx, crr, r)
 	}
 

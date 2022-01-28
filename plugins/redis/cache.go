@@ -2,7 +2,9 @@ package redis
 
 import (
 	"encoding/binary"
+	"fmt"
 	"hash/fnv"
+	"strconv"
 	"time"
 
 	"github.com/coredns/coredns/plugin/pkg/response"
@@ -11,19 +13,23 @@ import (
 	"github.com/miekg/dns"
 )
 
-// Return key under which we store the message, -1 will be returned if we don't store the message.
+// Return key under which we store the message.
 // Currently we do not cache Truncated, errors, zone transfers or dynamic update messages.
-func key(m *dns.Msg, t response.Type, do bool) int {
+func key(dontUseHash bool, m *dns.Msg, t response.Type, do bool) (bool, string) {
 	// We don't store truncated responses.
 	if m.Truncated {
-		return -1
+		return false, ""
 	}
 	// Nor errors or Meta or Update
 	if t == response.OtherError || t == response.Meta || t == response.Update {
-		return -1
+		return false, ""
 	}
 
-	return hash(m.Question[0].Name, m.Question[0].Qtype, do)
+	if dontUseHash {
+		return true, hashString(m.Question[0].Name, m.Question[0].Qtype, do)
+	} else {
+		return true, hashInt(m.Question[0].Name, m.Question[0].Qtype, do)
+	}
 }
 
 var (
@@ -31,7 +37,19 @@ var (
 	zero = []byte("0")
 )
 
-func hash(qname string, qtype uint16, do bool) int {
+func hashString(qname string, qtype uint16, do bool) string {
+	doSet := 0
+	if do {
+		doSet = 1
+	}
+
+	return fmt.Sprintf(
+		"%s|%d|%d",
+		qname, qtype, doSet,
+	)
+}
+
+func hashInt(qname string, qtype uint16, do bool) string {
 	h := fnv.New32()
 
 	if do {
@@ -52,7 +70,7 @@ func hash(qname string, qtype uint16, do bool) int {
 		h.Write([]byte{c})
 	}
 
-	return int(h.Sum32())
+	return strconv.Itoa(int(h.Sum32()))
 }
 
 // ResponseWriter is a response writer that caches the reply message in Redis.
@@ -60,7 +78,8 @@ type ResponseWriter struct {
 	dns.ResponseWriter
 	state request.Request
 	*Redis
-	server string
+	server      string
+	DontUseHash bool
 }
 
 // WriteMsg implements the dns.ResponseWriter interface.
@@ -72,7 +91,7 @@ func (w *ResponseWriter) WriteMsg(res *dns.Msg) error {
 	}
 
 	// key returns empty string for anything we don't want to cache.
-	key := key(res, mt, do)
+	cache, key := key(w.DontUseHash, res, mt, do)
 
 	duration := w.pttl
 	if mt == response.NameError || mt == response.NoData {
@@ -84,10 +103,9 @@ func (w *ResponseWriter) WriteMsg(res *dns.Msg) error {
 		duration = msgTTL
 	}
 
-	if key != -1 && duration > 0 {
-
+	if cache && duration > 0 {
 		if w.state.Match(res) {
-			w.set(res, key, mt, duration)
+			w.set(res, key, cache, mt, duration)
 		} else {
 			// Don't log it, but increment counter
 			cacheDrops.WithLabelValues(w.server).Inc()
@@ -110,8 +128,8 @@ func (w *ResponseWriter) WriteMsg(res *dns.Msg) error {
 	return w.ResponseWriter.WriteMsg(res)
 }
 
-func (w *ResponseWriter) set(m *dns.Msg, key int, mt response.Type, duration time.Duration) {
-	if key == -1 || duration == 0 {
+func (w *ResponseWriter) set(m *dns.Msg, key string, cache bool, mt response.Type, duration time.Duration) {
+	if !cache || duration == 0 {
 		return
 	}
 
