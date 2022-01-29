@@ -32,3 +32,8 @@ nfpms:
         type: dir
         file_info:
           mode: 0755
+      - src: example/config/default.conf
+        dst: /etc/ccdns/ccdns.conf
+        type: config|noreplace
+        file_info:
+          mode: 0644
