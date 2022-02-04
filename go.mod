@@ -3,6 +3,7 @@ module github.com/vitalvas/ccdns
 go 1.17
 
 require (
+	github.com/coredns/alternate v0.0.0-20201105225029-f0d10f2aa3aa
 	github.com/coredns/caddy v1.1.1
 	github.com/coredns/coredns v1.8.7
 	github.com/mediocregopher/radix.v2 v0.0.0-20181115013041-b67df6e626f9

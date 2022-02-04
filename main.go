@@ -5,6 +5,7 @@ import (
 	"github.com/coredns/coredns/core/dnsserver"
 	"github.com/coredns/coredns/coremain"
 
+	_ "github.com/coredns/alternate"
 	_ "github.com/coredns/coredns/plugin/acl"
 	_ "github.com/coredns/coredns/plugin/any"
 	_ "github.com/coredns/coredns/plugin/bind"
@@ -74,6 +75,7 @@ var directives = []string{
 	"filter",
 	"forward",
 	"grpc",
+	"alternate",
 	"whoami",
 }
 
