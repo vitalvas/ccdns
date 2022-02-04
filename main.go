@@ -81,6 +81,7 @@ var directives = []string{
 
 func init() {
 	dnsserver.Directives = directives
+	caddy.AppName = "CCDNS"
 	caddy.AppVersion = version
 }
 
