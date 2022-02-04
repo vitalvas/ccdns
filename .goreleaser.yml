@@ -4,6 +4,8 @@ builds:
     goarch:
       - amd64
       - arm
+    ldflags:
+      - -s -w
 
 checksum:
   disable: true
