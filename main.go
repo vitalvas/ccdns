@@ -35,6 +35,7 @@ import (
 	_ "github.com/milgradesec/filter"
 
 	_ "github.com/vitalvas/ccdns/plugins/redisc"
+	_ "github.com/vitalvas/ccdns/plugins/tldstats"
 )
 
 var (
@@ -58,6 +59,7 @@ var directives = []string{
 	"health",
 	"pprof",
 	"prometheus",
+	"tldstats",
 	"metrics",
 	"errors",
 	"log",

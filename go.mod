@@ -10,6 +10,7 @@ require (
 	github.com/miekg/dns v1.1.45
 	github.com/milgradesec/filter v1.2.3
 	github.com/prometheus/client_golang v1.12.0
+	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
 )
 
 require (
@@ -31,7 +32,6 @@ require (
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	golang.org/x/mod v0.5.1 // indirect
-	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba // indirect
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.8 // indirect
