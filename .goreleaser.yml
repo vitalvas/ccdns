@@ -30,12 +30,34 @@ nfpms:
         dst: /lib/systemd/system/ccdns.service
         file_info:
           mode: 0644
+          group: root
       - dst: /etc/ccdns
         type: dir
         file_info:
           mode: 0755
+          group: root
       - src: example/config/default.conf
         dst: /etc/ccdns/ccdns.conf
         type: config|noreplace
         file_info:
           mode: 0644
+          group: root
+
+dockers:
+  - image_templates:
+    - "ghcr.io/vitalvas/ccdns:{{ .Tag }}-amd64"
+    goarch: amd64
+    dockerfile: Dockerfile
+    extra_files:
+      - LICENSE
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/amd64"
+
+docker_manifests:
+  - name_template: ghcr.io/vitalvas/ccdns:{{ .Tag }}
+    image_templates:
+      - ghcr.io/vitalvas/ccdns:{{ .Tag }}-amd64
+  - name_template: ghcr.io/vitalvas/ccdns:latest
+    image_templates:
+      - ghcr.io/vitalvas/ccdns:{{ .Tag }}-amd64
