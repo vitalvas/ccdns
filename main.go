@@ -34,6 +34,7 @@ import (
 	_ "github.com/coredns/coredns/plugin/whoami"
 	_ "github.com/milgradesec/filter"
 
+	_ "github.com/vitalvas/ccdns/plugins/dummy"
 	_ "github.com/vitalvas/ccdns/plugins/redisc"
 	_ "github.com/vitalvas/ccdns/plugins/tldstats"
 )
@@ -73,6 +74,7 @@ var directives = []string{
 	"template",
 	"hosts",
 	"file",
+	"dummy",
 	"loop",
 	"filter",
 	"forward",
